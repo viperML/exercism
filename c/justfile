@@ -1,0 +1,8 @@
+[private]
+default:
+  @just -l
+
+[no-cd]
+db:
+  make clean
+  bear -- make

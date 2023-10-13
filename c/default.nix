@@ -5,5 +5,11 @@ with import <nixpkgs> {};
     packages = [
       exercism
       clang-tools
+      bear
+      just
     ];
+
+    shellHook = ''
+      just
+    '';
   }
