@@ -47,5 +47,6 @@ list_t *reverse_list(list_t *list);
 void delete_list(list_t *list);
 
 void add_to_list(list_t *list, list_element_t element);
+void print_list(list_t *list);
 
 #endif

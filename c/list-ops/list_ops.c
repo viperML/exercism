@@ -11,7 +11,7 @@ list_t *new_list(const size_t length, const list_element_t *elements) {
   list_t *res = malloc(sizeof(list_t));
 
   if (length == 0) {
-    res->_capacity = 10;
+    res->_capacity = 1;
   } else {
     res->_capacity = length;
   }
@@ -50,19 +50,32 @@ list_t *append_list(list_t *list1, list_t *list2) {
   return res;
 }
 
+void print_list(list_t *list) {
+  printf("[");
+  for (size_t i = 0; i != list->length; i++) {
+    printf(" %d", list->elements[i]);
+  }
+  printf(" ]\n");
+}
+
 void add_to_list(list_t *list, list_element_t element) {
   if (list->_capacity == list->length) {
+    // copy elements
     list->_capacity = list->_capacity * 2;
-
     list_element_t *new_elements =
         malloc(sizeof(list_element_t) * list->_capacity);
+    memcpy(new_elements, list->elements, list->length * sizeof(list_element_t));
 
+    // swap ptr
+    list_element_t *old = list->elements;
     list->elements = new_elements;
+    free(old);
   }
 
   list->elements[list->length] = element;
 
   list->length++;
+  print_list(list);
 }
 
 list_t *filter_list(list_t *list, bool (*filter)(list_element_t)) {
