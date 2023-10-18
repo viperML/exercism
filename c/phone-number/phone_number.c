@@ -19,7 +19,7 @@ char *trim_digits(const char *input) {
 
     if (isdigit(c)) {
       // Skip the first digit, which may be only 1
-      if (cursor == 0 && c == '0') {
+      if (cursor == 0 && c == '1') {
         continue;
       }
 
@@ -35,7 +35,7 @@ char *trim_digits(const char *input) {
 
 char *phone_number_clean(const char *input) {
   char *BAD = calloc(11, sizeof(char));
-  BAD = "0000000000";
+  strcpy(BAD, "0000000000");
 
   if (!input) {
     return BAD;
@@ -52,14 +52,18 @@ char *phone_number_clean(const char *input) {
 
   int x[2] = {0, 3};
   for (int i = 0; i < 2; i++) {
-    if (trimmed[x[i]] < '2' || trimmed[x[i]] > '9') {
+    char _case = trimmed[x[i]];
+    if (_case < '2' || _case > '9') {
+      printf("Character %c at position %d is not in range\n", _case, i);
       return BAD;
     }
   }
 
   int y[8] = {1, 2, 4, 5, 6, 7, 8, 9};
   for (int i = 0; i < 8; i++) {
-    if (trimmed[y[i]] < '0' || trimmed[y[i]] > '9') {
+    char _case = trimmed[y[i]];
+    if (_case < '0' || _case > '9') {
+      printf("Character %c at position %d is not in range\n", _case, i);
       return BAD;
     }
   }
